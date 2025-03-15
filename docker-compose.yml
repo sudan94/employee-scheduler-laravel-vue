@@ -1,0 +1,64 @@
+version: '1.0'
+
+services:
+  server:
+    image: server:latest
+    container_name: laravel-vue-app
+    build:
+      context: ./backend
+    command: >
+      sh -c "
+        php artisan key:generate;
+        while ! nc -z mysql 3306; do sleep 1; done;
+        php artisan migrate;
+        php artisan serve --host 0.0.0.0
+      "
+    env_file:
+      - ./backend/.env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+       - app/vendor
+    working_dir: /app
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: laravel-vue-db
+    environment:
+      MYSQL_ROOT_PASSWORD: sudan1
+      MYSQL_DATABASE: hrpuls1
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+  client:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: dev
+      CHOKIDAR_USEPOLLING: "true"
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/var/www
+      - /var/www/node_modules
+    depends_on:
+      - server
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
