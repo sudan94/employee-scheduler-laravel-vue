@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class EmployeeController extends Controller
 {
      public function index(){
-        return EmployeeResource::collection(Employee::paginate(50));
+        return EmployeeResource::collection(Employee::paginate(15));
      }
 
      public function store(Request $request)

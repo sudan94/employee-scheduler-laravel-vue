@@ -10,5 +10,5 @@ Route::apiResource('employees', EmployeeController::class);
 
 // Scheduled Changes API (Only Store)
 Route::post('/scheduled-changes', [ScheduledChangeController::class, 'store']);
-
+Route::get('/scheduled-changes', [ScheduledChangeController::class, 'index']);
 
