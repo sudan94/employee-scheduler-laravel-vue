@@ -43,6 +43,11 @@ export const useEmployeeStore = defineStore("employee", {
       this.fetchEmployees();
     },
 
+    async getEmployee(id) {
+      const response = await api.get(`/employees/${id}`);
+      return response.data;
+    },
+
     async scheduleChange(id, field, newValue, changeDate) {
       await api.post(`/employees/${id}/schedule-change`, { field, new_value: newValue, change_date: changeDate });
     },

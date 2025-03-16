@@ -33,7 +33,7 @@
             <button class="btn btn-info btn-sm me-2" title="Schedule Change" @click="openScheduleChangeModal(employee)">
               <i class="bi bi-clock"></i>
             </button>
-            <button class="btn btn-danger btn-sm" title="Delete" @click="store.deleteEmployee(employee.id)">
+            <button class="btn btn-danger btn-sm" title="Delete" @click="openEmployeeDeleteModal(employee)">
               <i class="bi bi-trash"></i>
             </button>
           </td>
@@ -87,6 +87,7 @@
     <!-- Modals -->
     <EmployeeModal v-if="showModal" :employee="selectedEmployee" @close="showModal = false" />
     <ScheduleChangeModal v-if="showScheduleModal" :employee="selectedEmployee" @close="showScheduleModal = false" />
+    <EmployeeDeleteModal v-if="showDeleteModal" :employee="selectedEmployee" @close="showDeleteModal = false" />
   </div>
 </template>
 
@@ -95,10 +96,12 @@ import { ref, onMounted, computed } from "vue";
 import { useEmployeeStore } from "../stores/employeeStore";
 import EmployeeModal from "./EmployeeModal.vue";
 import ScheduleChangeModal from "./ScheduleChangeModal.vue";
+import EmployeeDeleteModal from "./EmployeeDeleteModal.vue";
 
 const store = useEmployeeStore();
 const showModal = ref(false);
 const showScheduleModal = ref(false);
+const showDeleteModal = ref(false);
 const selectedEmployee = ref(null);
 
 onMounted(() => {
@@ -118,6 +121,11 @@ const openEditModal = (employee) => {
 const openScheduleChangeModal = (employee) => {
   selectedEmployee.value = { ...employee };
   showScheduleModal.value = true;
+};
+
+const openEmployeeDeleteModal = (employee) => {
+  selectedEmployee.value = { ...employee };
+  showDeleteModal.value = true;
 };
 
 const visiblePages = computed(() => {
