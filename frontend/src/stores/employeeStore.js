@@ -49,7 +49,7 @@ export const useEmployeeStore = defineStore("employee", {
     },
 
     async scheduleChange(id, field, newValue, changeDate) {
-      await api.post(`/employees/${id}/schedule-change`, { field, new_value: newValue, change_date: changeDate });
+      await api.post(`/scheduled-changes`, { employee_id: id, field, new_value: newValue, effective_date: changeDate });
     },
   },
 });

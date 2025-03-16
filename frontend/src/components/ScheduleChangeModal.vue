@@ -8,13 +8,15 @@
           </div>
 
           <div class="modal-body">
-            <form @submit.prevent="scheduleChange">
+            <form @submit.prevent="handleSubmit">
               <div class="mb-3">
                 <label class="form-label">Field</label>
                 <select v-model="field" class="form-control">
                   <option value="name">Name</option>
                   <option value="email">Email</option>
-                  <option value="jobtitle">Job Title</option>
+                  <option value="job_title">Job Title</option>
+                  <option value="address">Address</option>
+                  <option value="phone">Phone</option>
                 </select>
               </div>
               <div class="mb-3">
@@ -29,7 +31,7 @@
           </div>
 
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" @click="scheduleChange">Schedule</button>
+            <button type="submit" class="btn btn-primary" @click="handleSubmit">Schedule</button>
             <button type="button" class="btn btn-secondary" @click="close">Cancel</button>
           </div>
         </div>
@@ -46,17 +48,22 @@ const emit = defineEmits(["close"]);
 const props = defineProps(["employee"]);
 const localEmployee = ref({ name: "", email: "", jobtitle: "" });
 
+const field = ref('name');
+const newValue = ref('');
+const changeDate = ref('');
+
+const handleSubmit = async () => {
+  try {
+    await store.scheduleChange(props.employee.id, field.value, newValue.value, changeDate.value);
+    close();
+  } catch (error) {
+    console.error('Error scheduling change:', error);
+  }
+};
+
 watch(props, () => {
   localEmployee.value = props.employee ? { ...props.employee } : { name: "", email: "", jobtitle: "" };
 });
 
-const saveEmployee = async () => {
-  if (localEmployee.value.id) {
-    await store.updateEmployee(localEmployee.value.id, localEmployee.value);
-  } else {
-    await store.createEmployee(localEmployee.value);
-  }
-  emit("close");
-};
 const close = () => emit("close");
 </script>
