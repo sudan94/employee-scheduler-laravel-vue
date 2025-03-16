@@ -29,4 +29,9 @@ class EmployeeController extends Controller
         $employee->delete();
         return response()->json(['message' => 'Employee deleted'],204);
      }
+
+     public function show(Employee $employee)
+     {
+        return new EmployeeResource($employee);
+     }
 }
