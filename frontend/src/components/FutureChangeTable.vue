@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid mt-5">
+    <div class="container-fluid mt-3">
       <h2 class="mb-4 text-center">Future Changes</h2>
 
 

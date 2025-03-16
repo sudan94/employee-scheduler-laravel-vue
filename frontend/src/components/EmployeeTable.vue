@@ -1,10 +1,10 @@
 <template>
-  <div class="container-fluid mt-5">
-    <h2 class="mb-4 text-center">Employee Management</h2>
-
-    <button class="btn btn-primary mb-3" @click="openAddModal">
+  <div class="container-fluid mt-3">
+    <h2 class="mb-4 text-center">Employee List     <button class="btn btn-primary mb-3 float-end" @click="openAddModal">
       <i class="bi bi-plus-circle"></i> Add Employee
-    </button>
+    </button></h2>
+
+
 
     <table class="table table-striped">
       <thead class="table-dark">
