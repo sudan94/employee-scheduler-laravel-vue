@@ -8,7 +8,7 @@ export const useEmployeeStore = defineStore("employee", {
   }),
 
   actions: {
-    async fetchEmployees(page) {
+    async fetchEmployees(page = 1) {
       try {
         const response = await api.get(`/employees?page=${page}`);
         this.employees = response.data.data;
