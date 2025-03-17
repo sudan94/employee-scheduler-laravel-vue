@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use App\Models\ScheduledChange;
 use App\Models\Employee;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Log;
 class ProcessScheduledChanges extends Command
 {
     /**
@@ -41,7 +41,7 @@ class ProcessScheduledChanges extends Command
                 $change->update(['processed_at' => now()]);
             }
         }
-
+        Log::info('Scheduled Apply Command running at: ' . now());
         $this->info("Scheduled changes applied.");
     }
 }
