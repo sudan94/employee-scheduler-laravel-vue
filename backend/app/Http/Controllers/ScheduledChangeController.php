@@ -29,6 +29,6 @@ class ScheduledChangeController extends Controller
                 'scheduled_changes.processed_at',
                 'scheduled_changes.effective_date'
             )
-            ->paginate(10);
+            ->paginate(15);
     }
 }
