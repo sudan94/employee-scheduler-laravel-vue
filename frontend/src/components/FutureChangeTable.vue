@@ -33,12 +33,12 @@
       <nav v-if="store.pagination.last_page > 1" class="d-flex justify-content-end">
         <ul class="pagination">
           <li class="page-item" :class="{ disabled: store.pagination.current_page === 1 }">
-            <button class="page-link" @click="store.fetchEmployees(store.pagination.current_page - 1)">Previous</button>
+            <button class="page-link" @click="store.fetchFutureChanges(store.pagination.current_page - 1)">Previous</button>
           </li>
 
           <!-- First page -->
           <li class="page-item" :class="{ active: 1 === store.pagination.current_page }">
-            <button class="page-link" @click="store.fetchEmployees(1)">1</button>
+            <button class="page-link" @click="store.fetchFutureChanges(1)">1</button>
           </li>
 
           <!-- Left ellipsis -->
@@ -49,7 +49,7 @@
           <!-- Pages around current page -->
           <li class="page-item" v-for="page in visiblePages" :key="page"
               :class="{ active: page === store.pagination.current_page }">
-            <button class="page-link" @click="store.fetchEmployees(page)">{{ page }}</button>
+            <button class="page-link" @click="store.fetchFutureChanges(page)">{{ page }}</button>
           </li>
 
           <!-- Right ellipsis -->
@@ -60,13 +60,13 @@
           <!-- Last page -->
           <li class="page-item" v-if="store.pagination.last_page > 1"
               :class="{ active: store.pagination.last_page === store.pagination.current_page }">
-            <button class="page-link" @click="store.fetchEmployees(store.pagination.last_page)">
+            <button class="page-link" @click="store.fetchFutureChanges(store.pagination.last_page)">
               {{ store.pagination.last_page }}
             </button>
           </li>
 
           <li class="page-item" :class="{ disabled: store.pagination.current_page === store.pagination.last_page }">
-            <button class="page-link" @click="store.fetchEmployees(store.pagination.current_page + 1)">Next</button>
+            <button class="page-link" @click="store.fetchFutureChanges(store.pagination.current_page + 1)">Next</button>
           </li>
         </ul>
       </nav>

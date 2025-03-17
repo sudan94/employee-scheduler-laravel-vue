@@ -32,14 +32,14 @@ export const useEmployeeStore = defineStore("employee", {
         const response = await api.get(`/scheduled-changes?page=${page}`);
         this.employees = response.data.data;
         this.pagination = {
-          current_page: response.data.meta.current_page,
-          last_page: response.data.meta.last_page,
-          per_page: response.data.meta.per_page,
-          total: response.data.meta.total,
-          from: response.data.meta.from,
-          to: response.data.meta.to,
-          prev_page_url: response.data.meta.prev_page_url,
-          next_page_url: response.data.meta.next_page_url
+          current_page: response.data.current_page,
+          last_page: response.data.last_page,
+          per_page: response.data.per_page,
+          total: response.data.total,
+          from: response.data.from,
+          to: response.data.to,
+          prev_page_url: response.data.prev_page_url,
+          next_page_url: response.data.next_page_url
         };
       } catch (error) {
         console.error('Error fetching employees:', error);
