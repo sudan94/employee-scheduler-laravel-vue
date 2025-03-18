@@ -22,17 +22,16 @@ Copy `.env.example` to `.env` in the backend directory:
 ```bash
 cp backend/.env.example backend/.env
 ```
-
+> **_NOTE:_** The database connection settings in `.env` should match:
 ```bash
 # Database Configuration
 DB_CONNECTION=mysql
 DB_HOST=laravel-vue-db
 DB_PORT=3306
 DB_DATABASE=hrpuls_test
-DB_USERNAME=your-db-user
-DB_PASSWORD=your-db-password
+DB_USERNAME=root
+DB_PASSWORD=
 ```
-
 
 ## Running the Application
 
