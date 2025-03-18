@@ -1,4 +1,4 @@
-version: '1.2'
+version: '2.1'
 
 services:
   server:
@@ -10,8 +10,6 @@ services:
       sh -c "
         service cron restart &&
         php artisan key:generate;
-        while ! nc -z mysql 3306; do sleep 1; done;
-        php artisan migrate;
         php artisan serve --host 0.0.0.0
       "
     env_file:
@@ -32,9 +30,8 @@ services:
   mysql:
     image: mysql:8.0
     container_name: laravel-vue-db
-    environment:
-      MYSQL_ROOT_PASSWORD: sudan1
-      MYSQL_DATABASE: hrpuls1
+    env_file:
+      - ./backend/.env
     volumes:
       - dbdata:/var/lib/mysql
     ports:
@@ -43,6 +40,7 @@ services:
       - app-network
 
   client:
+    container_name: laravel-vue-client
     build:
       context: ./frontend
       dockerfile: ./Dockerfile
