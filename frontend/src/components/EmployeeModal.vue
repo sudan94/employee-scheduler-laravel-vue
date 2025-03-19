@@ -77,7 +77,9 @@
 <script setup>
 import { ref, defineProps, defineEmits, watch } from "vue";
 import { useEmployeeStore } from "../stores/employeeStore";
+import { useToast } from 'vue-toastification';
 
+const toast = useToast();
 const store = useEmployeeStore();
 const emit = defineEmits(["close"]);
 const props = defineProps(["employee"]);
@@ -100,8 +102,10 @@ watch(
 const saveEmployee = async () => {
   if (localEmployee.value.id) {
     await store.updateEmployee(localEmployee.value.id, localEmployee.value);
+    toast.success("Employee updated successfully");
   } else {
     await store.createEmployee(localEmployee.value);
+    toast.success("Employee created successfully");
   }
   emit("close");
 };

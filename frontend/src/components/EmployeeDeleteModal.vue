@@ -29,7 +29,9 @@
 <script setup>
 import { ref, defineProps, defineEmits, watch } from "vue";
 import { useEmployeeStore } from "../stores/employeeStore";
+import { useToast } from 'vue-toastification';
 
+const toast = useToast();
 const store = useEmployeeStore();
 const emit = defineEmits(["close"]);
 const props = defineProps(["employee"]);
@@ -45,6 +47,7 @@ const deleteEmployee = async () => {
   }
   await store.deleteEmployee(localEmployee.value.id);
   emit("close");
+  toast.success("Employee deleted successfully");
 };
 const close = () => emit("close");
 </script>

@@ -42,7 +42,9 @@
 <script setup>
 import { ref, defineProps, defineEmits, watch } from "vue";
 import { useEmployeeStore } from "../stores/employeeStore";
+import { useToast } from 'vue-toastification';
 
+const toast = useToast();
 const store = useEmployeeStore();
 const emit = defineEmits(["close"]);
 const props = defineProps(["employee"]);
@@ -56,6 +58,7 @@ const handleSubmit = async () => {
   try {
     await store.scheduleChange(props.employee.id, field.value, newValue.value, changeDate.value);
     close();
+    toast.success("Saved scheduled change successfully");
   } catch (error) {
     console.error('Error scheduling change:', error);
   }
