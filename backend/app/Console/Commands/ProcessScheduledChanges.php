@@ -7,6 +7,7 @@ use App\Models\ScheduledChange;
 use App\Models\Employee;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+
 class ProcessScheduledChanges extends Command
 {
     /**
@@ -30,18 +31,16 @@ class ProcessScheduledChanges extends Command
     {
         $today = Carbon::today();
 
-        $changes = ScheduledChange::whereNull('processed_at')
+        ScheduledChange::whereNull('processed_at')
             ->where('effective_date', '<=', $today)
-            ->get();
-
-        foreach ($changes as $change) {
-            $employee = Employee::find($change->employee_id);
-            if ($employee) {
-                $employee->update([$change->field => $change->new_value]);
-                $change->update(['processed_at' => now()]);
-            }
-        }
-        Log::info('Scheduled Apply Command running at: ' . now());
-        $this->info("Scheduled changes applied.");
+            ->chunk(1000, function ($changes) {
+                foreach ($changes as $change) {
+                    $employee = Employee::find($change->employee_id);
+                    if ($employee) {
+                        $employee->update([$change->field => $change->new_value]);
+                        $change->update(['processed_at' => now()]);
+                    }
+                }
+            });
     }
 }
