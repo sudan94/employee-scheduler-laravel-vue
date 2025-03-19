@@ -22,7 +22,7 @@ Copy `.env.example` to `.env` in the backend directory:
 ```bash
 cp backend/.env.example backend/.env
 ```
-> **_NOTE:_** The database connection settings in `.env` should match:
+> **_NOTE:_** The database connection settings in `.env` should match your MySQL server configuration. If you have MySQL already running locally, update the credentials for (DB_USERNAME and DB_PASSWORD) accordingly.
 ```bash
 # Database Configuration
 DB_CONNECTION=mysql
