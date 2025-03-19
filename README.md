@@ -52,7 +52,7 @@ docker-compose exec server php artisan migrate
 docker-compose exec server php artisan db:seed --class=EmployeeSeeder
 ```
 
-4. Access the backend application:
+4. Access the frontend application:
 - Frontend: `http://localhost:3000`
 
 5. Access the backend API:
