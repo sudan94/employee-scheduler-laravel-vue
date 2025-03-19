@@ -18,6 +18,7 @@
                 v-model="localEmployee.name"
                 class="form-control"
                 required
+                :class="{ 'is-invalid': errors.name }"
               />
             </div>
             <div class="mb-3">
@@ -27,6 +28,7 @@
                 v-model="localEmployee.email"
                 class="form-control"
                 required
+                :class="{ 'is-invalid': errors.email }"
               />
             </div>
 
@@ -83,6 +85,7 @@ const toast = useToast();
 const store = useEmployeeStore();
 const emit = defineEmits(["close"]);
 const props = defineProps(["employee"]);
+const errors = ref({});
 const localEmployee = ref(
   props.employee ? { ...props.employee } : { name: "", email: "", job_title: "", address: "", phone: "" }
 );
@@ -99,7 +102,28 @@ watch(
   { immediate: true }
 );
 
+const validateForm = () => {
+  errors.value = {};
+  let isValid = true;
+
+  if (!localEmployee.value.name) {
+    errors.value.name = true;
+    isValid = false;
+  }
+
+  if (!localEmployee.value.email) {
+    errors.value.email = true;
+    isValid = false;
+  }
+
+  return isValid;
+};
+
 const saveEmployee = async () => {
+  if (!validateForm()) {
+    toast.error("Please fill in all required fields");
+    return;
+  }
   if (localEmployee.value.id) {
     await store.updateEmployee(localEmployee.value.id, localEmployee.value);
     toast.success("Employee updated successfully");
