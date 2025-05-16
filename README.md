@@ -1,6 +1,8 @@
 # Employee Scheduler
 
-A Laravel-based HR management system with employee scheduling features.
+This is a demo application built with Laravel (API) and Vue.js, showcasing a basic scheduler for future data changes. The main feature allows users to schedule updates—such as changing an employee's address—that will automatically take effect on a specified future date.
+
+The system uses the Laravel Scheduler with a cron job running every 5 minutes to check and apply scheduled changes. The project is containerized using Docker and uses MySQL for data storage.
 
 ## Prerequisites
 
