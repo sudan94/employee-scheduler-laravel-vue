@@ -14,8 +14,8 @@ The system uses the Laravel Scheduler with a cron job running every 5 minutes to
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/sudan94/hrpuls-test.git
-cd hrpuls-test
+git clone https://github.com/sudan94/employee-scheduler-laravel-vue.git
+cd employee-scheduler-laravel-vue
 ```
 
 2. Create Laravel environment file:
@@ -39,7 +39,7 @@ DB_PASSWORD=
 
 1. Build and start the containers:
 ```bash
-cd hrpuls-test
+cd employee-scheduler-laravel-vue
 docker-compose up -d --build
 ```
 
