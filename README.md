@@ -1,4 +1,4 @@
-# HR Pulse Test Application
+# Employee Scheduler
 
 A Laravel-based HR management system with employee scheduling features.
 
